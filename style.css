@@ -1,0 +1,132 @@
+:root{
+    --primary--: #161A30;
+    --secondary--: #31304D;
+    --third--: #B6BBC4;
+    --four--: #EE7214;
+}
+
+body{
+    background: var(--secondary--);
+}
+
+* {
+   margin: 0;
+   padding: 0;
+   box-sizing: border-box; 
+}
+header{
+    display: flex;
+    width: 100%;
+    height: 70px;
+    background: var(--primary--);
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0px;
+    z-index: 100;
+}
+.appName{
+    color: var(--third--);
+    margin-left: 10px;
+    font-family: Rubik Scribble;
+    font-size: 20px;
+}
+.textApp{
+    font-weight: bold;
+    color: var(--four--);
+}
+form{
+    margin: 25px;
+}
+#search{
+    padding: 10px;
+    border-radius: 20px;
+    outline: none;
+    border: 2px var(--secondary--) solid;
+    background-color: var(--primary--);
+    color: var(--third--);
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    width: 300px;
+    border-right: 0;
+}
+#search:focus{
+    background-color: #31304D;
+}
+#search::placeholder{
+    color: var(--third--);
+}
+.movieBloc{
+    width: 300px;
+    background: var(--primary--);
+    border: 2px var(--secondary--) solid;
+    margin: 15px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+}
+.movieBloc img{
+    width: 100%;
+}
+section{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 10px;
+}
+.movieInfo{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px;
+}
+.movieInfo span{
+    margin-top: 25px;
+    font-weight: bold;
+    background: var(--secondary--);
+    padding: 0.5rem 1.2rem;
+}
+.movieInfo h1{
+    color: white;
+    font-weight: bold;
+    letter-spacing: 0px;
+    font-family: 'Kanit', sans-serif;
+    color: var(--four--);
+}
+.overview{
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: white;
+    padding: 1rem;
+    max-height: 100%;
+    transform: translate(100%);
+    transition: transform 1s ease-in-out;
+}
+.movieBloc:hover .overview{
+    transform: translate(0);
+}
+form button{
+    border-radius: 50%;
+    padding: 0.8em;
+    left: 0;
+    background: var(--primary--);
+    border: 2px var(--secondary--) solid;
+    border-collapse: collapse;
+    border-left: 0px;
+
+}
+
+ion-icon{
+    color: var(--third--);
+}
+.green{
+    color: green;
+}
+.red{
+    color: red;
+}
+.orange{
+    color: rgb(245, 159, 0);
+}
