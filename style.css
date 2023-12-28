@@ -3,6 +3,7 @@
     --secondary--: #31304D;
     --third--: #B6BBC4;
     --four--: #EE7214;
+    --buttonColor--: #29ADB2;
 }
 
 body{
@@ -30,6 +31,7 @@ header{
     margin-left: 10px;
     font-family: Rubik Scribble;
     font-size: 20px;
+    cursor: pointer;
 }
 .textApp{
     font-weight: bold;
@@ -129,3 +131,24 @@ ion-icon{
 .orange{
     color: rgb(245, 159, 0);
 }
+.icon{
+    display: none;
+}
+#filter{
+    width: 100%;
+    margin: 30px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+#filter button {
+    padding: 10px 10px;
+    margin-right: 5px;
+    background-color: #eaeaea;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    border-radius: 20px;
+    background-color: var(--four--);
+}
+

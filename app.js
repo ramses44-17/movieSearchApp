@@ -67,5 +67,11 @@ submit.addEventListener('click',()=>{
         fetchUrl(apiUrl)
     }
 })
+ const movieAppName = document.querySelector('.appName').addEventListener('click',()=>{
+    fetchUrl(apiUrl)
+ })
 
-
+ 
+ let a = 'https://api.themoviedb.org/3/genre/movie/list?' + apiKey
+ console.log(a);
+ fetch(`https://api.themoviedb.org/3/discover/movie?${apiKey}&with_genres=28`).then(res => res.json()).then(data => console.log(data))
