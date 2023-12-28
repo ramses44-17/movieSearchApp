@@ -113,7 +113,6 @@ form button{
     left: 0;
     background: var(--primary--);
     border: 2px var(--secondary--) solid;
-    border-collapse: collapse;
     border-left: 0px;
 
 }
