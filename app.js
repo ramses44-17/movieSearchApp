@@ -1,6 +1,6 @@
 const apiKey = "api_key=7f77f1bc80c6fe267d4de7f850631d9d"
 const baseUrl = "https://api.themoviedb.org/3/"
-const  apiUrl = baseUrl + "discover/movie?sort_by=popularity.desc&" + apiKey
+const  apiUrl = baseUrl + "discover/movie?sort_by=popularity.desc&" + apiKey + "&certification_country=US&certification=R"
 const imageUrl = "https://image.tmdb.org/t/p/w500"
 const section = document.querySelector('.movieSection')
 const search = document.querySelector('#search')
@@ -72,7 +72,7 @@ submit.addEventListener('click',()=>{
     fetchUrl(apiUrl)
  })
 
- fetch(`https://api.themoviedb.org/3/discover/movie?${apiKey}&with_genres=28`).then(res => res.json()).then(data => console.log(data))
+ fetch(`https://api.themoviedb.org/3/discover/movie?${apiKey}&with_genres=28,35`).then(res => res.json()).then(data => console.log(data))
 
 const genreUrl = baseUrl + 'genre/movie/list?' + apiKey
 const filter = document.querySelector('#filter')
@@ -88,14 +88,36 @@ getGenre(genreUrl)
     })
  }
 
-// cette fontion affiche le genre souds forme de bouton
+// cette fontion affiche le genre sous forme de bouton
  function showGenre(data) {
   filter.innerHTML = ''
   data.forEach(genres => {
     const genre = document.createElement('button')
     genre.classList.add('filterB')
-    genre.innerHTML = genres.name
-
+    genre.textContent = genres.name
+    
     filter.appendChild(genre)
-  } )  
+    genre.addEventListener('click',()=>{
+        toggleGenreSelection(genres.id)
+        genre.classList.toggle('active')
+       getFilteredMovie()
+    })
+  })  
+ }
+
+ const genreSelected = []
+
+ function toggleGenreSelection(genreId) {
+    const index = genreSelected.indexOf(genreId)
+    if (index > -1) {
+        genreSelected.splice(index,1)
+    }else{
+        genreSelected.push(genreId)
+    }
+   getFilteredMovie()
+ }
+
+ function getFilteredMovie() {
+    const selectedGenreString = genreSelected.join(',')
+    fetchUrl(baseUrl +'discover/movie?' + apiKey + `&with_genres=${selectedGenreString}`)
  }
