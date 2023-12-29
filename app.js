@@ -18,6 +18,7 @@ function fetchUrl(url) {
 }
 
 
+
 function getMovie(data) {
     section.innerHTML = ""
     data.forEach(movie => {
@@ -71,7 +72,30 @@ submit.addEventListener('click',()=>{
     fetchUrl(apiUrl)
  })
 
- 
- let a = 'https://api.themoviedb.org/3/genre/movie/list?' + apiKey
- console.log(a);
  fetch(`https://api.themoviedb.org/3/discover/movie?${apiKey}&with_genres=28`).then(res => res.json()).then(data => console.log(data))
+
+const genreUrl = baseUrl + 'genre/movie/list?' + apiKey
+const filter = document.querySelector('#filter')
+
+getGenre(genreUrl)
+
+ function getGenre(url) {
+    fetch(url)
+    .then(res => res.json())
+    .then(data => {
+        console.log(data.genres);
+        showGenre(data.genres)
+    })
+ }
+
+// cette fontion affiche le genre souds forme de bouton
+ function showGenre(data) {
+  filter.innerHTML = ''
+  data.forEach(genres => {
+    const genre = document.createElement('button')
+    genre.classList.add('filterB')
+    genre.innerHTML = genres.name
+
+    filter.appendChild(genre)
+  } )  
+ }

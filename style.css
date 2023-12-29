@@ -135,13 +135,15 @@ ion-icon{
     display: none;
 }
 #filter{
-    width: 100%;
-    margin: 30px;
+    width: 70%;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    margin-left: 15%;
+    border-radius: 20px;
+    margin-top: 20px;
 }
-#filter button {
+.filterB {
     padding: 10px 10px;
     margin-right: 5px;
     background-color: #eaeaea;
@@ -150,5 +152,16 @@ ion-icon{
     cursor: pointer;
     border-radius: 20px;
     background-color: var(--four--);
-}
+    margin-bottom: 10px;
+    font-family: 'Playfair Display', serif;
 
+}
+.filterB:hover{
+    background-color: var(--primary--);
+    color: white;
+}
+.active{
+    background-color: var(--primary--);
+    font-weight: bold;
+    color: white;
+}
