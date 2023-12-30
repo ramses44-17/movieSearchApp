@@ -119,7 +119,7 @@ form button{
 
 }
 
-ion-icon{
+button ion-icon{
     color: var(--third--);
 }
 .green{
@@ -164,4 +164,13 @@ ion-icon{
     background-color: var(--primary--);
     font-weight: bold;
     color: white;
+}
+.noFound{
+    color: red;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+.iconFound{
+    color: red;
+    font-size: 40px;
+    display: block;
 }

@@ -1,6 +1,6 @@
 const apiKey = "api_key=7f77f1bc80c6fe267d4de7f850631d9d"
 const baseUrl = "https://api.themoviedb.org/3/"
-const  apiUrl = baseUrl + "discover/movie?sort_by=popularity.desc&" + apiKey + "&certification_country=US&certification=R"
+const  apiUrl = baseUrl + "discover/movie?sort_by=popularity.desc&" + apiKey + '&include_adult=true'
 const imageUrl = "https://image.tmdb.org/t/p/w500"
 const section = document.querySelector('.movieSection')
 const search = document.querySelector('#search')
@@ -8,24 +8,32 @@ const form = document.querySelector('#form')
 const searchUrl = baseUrl + 'search/movie?' + apiKey
 const submit = document.querySelector('#submit')
 
-fetchUrl(apiUrl)
+getMovie(apiUrl)
 
-function fetchUrl(url) {
+function getMovie(url) {
     fetch(url).then(res => res.json()).then(data => {
-        getMovie(data.results)
+        
         console.log(data);
+        if(data.results.length !== 0){
+            showMovie(data.results)
+        }else{
+            section.innerHTML = `
+            <ion-icon name="warning-outline" class='iconFound'></ion-icon>
+            <h1 class="noFound" >no results found </h1>
+            `
+        }
     })
 }
 
 
 
-function getMovie(data) {
+function showMovie(data) {
     section.innerHTML = ""
     data.forEach(movie => {
         const film = document.createElement('div')
         film.classList.add('movieBloc')
         film.innerHTML = `
-        <a href="#"><img src="${imageUrl + movie.poster_path}" alt="image"></a>
+        <a href="#"><img src="${movie.poster_path?imageUrl + movie.poster_path: "https://via.placeholder.com/150/65ad4f"}" alt="image"></a>
         <div class="movieInfo">
             <h1 id="movieName">${movie.title}</h1><span class="${getColors(movie.vote_average)}">${movie.vote_average}</span>
         </div>
@@ -35,7 +43,6 @@ function getMovie(data) {
         </div>
         `
         section.appendChild(film)
-
         
     });
 }
@@ -54,25 +61,23 @@ form.addEventListener('submit',(e)=>{
     e.preventDefault()
     const searchTerm = search.value
     if (searchTerm) {
-        fetchUrl(searchUrl + '&query=' + searchTerm)
+        getMovie(searchUrl + '&query=' + searchTerm + '&include_adult=true')
     }else{
-        fetchUrl(apiUrl)
+        getMovie(apiUrl)
     }
 })
 
 submit.addEventListener('click',()=>{
     const searchTerm = search.value
     if (searchTerm) {
-        fetchUrl(searchUrl + '&query=' + searchTerm)
+        getMovie(searchUrl + '&query=' + searchTerm)
     }else{
-        fetchUrl(apiUrl)
+        getMovie(apiUrl)
     }
 })
  const movieAppName = document.querySelector('.appName').addEventListener('click',()=>{
-    fetchUrl(apiUrl)
+    getMovie(apiUrl)
  })
-
- fetch(`https://api.themoviedb.org/3/discover/movie?${apiKey}&with_genres=28,35`).then(res => res.json()).then(data => console.log(data))
 
 const genreUrl = baseUrl + 'genre/movie/list?' + apiKey
 const filter = document.querySelector('#filter')
@@ -95,7 +100,7 @@ getGenre(genreUrl)
     const genre = document.createElement('button')
     genre.classList.add('filterB')
     genre.textContent = genres.name
-    
+
     filter.appendChild(genre)
     genre.addEventListener('click',()=>{
         toggleGenreSelection(genres.id)
@@ -119,5 +124,8 @@ getGenre(genreUrl)
 
  function getFilteredMovie() {
     const selectedGenreString = genreSelected.join(',')
-    fetchUrl(baseUrl +'discover/movie?' + apiKey + `&with_genres=${selectedGenreString}`)
+    getMovie(baseUrl +'discover/movie?' + apiKey + `&with_genres=${selectedGenreString}` + '&include_adult=true' )
  }
+
+
+
