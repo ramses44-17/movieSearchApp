@@ -174,3 +174,26 @@ button ion-icon{
     font-size: 40px;
     display: block;
 }
+#pagination{
+    display: flex;
+    justify-content: space-around;
+    margin: 10px;
+    color: white;
+    width: 30%;
+    margin-left: 32%;
+}
+.page{
+    cursor: pointer;
+    margin-top: 17px;
+}
+#current{
+    border: 4px rgb(25, 146, 146) solid;
+    border-radius: 50%;
+    padding: 10px 20px;
+    font-weight: 600;
+    font-size: 15px;
+}
+.disable{
+    cursor: not-allowed;
+    color: gray;
+}

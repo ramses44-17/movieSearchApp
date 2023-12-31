@@ -8,7 +8,14 @@ const form = document.querySelector('#form')
 const searchUrl = baseUrl + 'search/movie?' + apiKey
 const submit = document.querySelector('#submit')
 
+
+
+const prev = document.querySelector('#prev')
+const next = document.querySelector('#next')
+const current = document.querySelector('#current')
+
 getMovie(apiUrl)
+
 
 function getMovie(url) {
     fetch(url).then(res => res.json()).then(data => {
@@ -126,6 +133,3 @@ getGenre(genreUrl)
     const selectedGenreString = genreSelected.join(',')
     getMovie(baseUrl +'discover/movie?' + apiKey + `&with_genres=${selectedGenreString}` + '&include_adult=true' )
  }
-
-
-
