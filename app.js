@@ -34,10 +34,13 @@ function getMovie(url) {
             prevPage = currentPage - 1
             nextPage  = currentPage + 1
             totalPage = data.total_pages
-            if (currentPage <= 1) {
+            if (totalPage === 1) {
+                prev.classList.add('disable')
+                next.classList.add('disable')
+            }else if (currentPage <= 1) {
                 prev.classList.add('disable')
                 next.classList.remove('disable')
-            } else if(nextPage >= totalPage){
+            } else if(currentPage >= totalPage){
                 prev.classList.remove('disable')
                 next.classList.add('disable')
             }else{
@@ -114,9 +117,6 @@ submit.addEventListener('click',()=>{
         getMovie(apiUrl)
     }
 })
- const movieAppName = document.querySelector('.appName').addEventListener('click',()=>{
-    getMovie(apiUrl)
- })
 
 const genreUrl = baseUrl + 'genre/movie/list?' + apiKey
 const filter = document.querySelector('#filter')
@@ -127,7 +127,6 @@ getGenre(genreUrl)
     fetch(url)
     .then(res => res.json())
     .then(data => {
-        console.log(data.genres);
         showGenre(data.genres)
     })
  }
@@ -178,8 +177,28 @@ next.addEventListener('click',()=>{
 })
 
 // cette fonction gère la pagination
+
 function callPage(page) {
-    let urlSplit = lastUrl.includes('?') ? '&' : '?'
+    let separator = lastUrl.includes('?') ? '&' : '?'
     const pagination = `page=${page}`
-    return `${getMovie(`${lastUrl}${urlSplit}${pagination}`)}`
+    return `${getMovie(`${lastUrl}${separator}${pagination}`)}`
 }
+const searchIcons = document.querySelector('.icon')
+const appNAme = document.querySelector('.appName')
+const closer = document.querySelector('#close')
+searchIcons.addEventListener('click',()=>{
+    form.style.display = 'block'
+    searchIcons.style.display = 'none'
+    appNAme.style.display = 'none'
+    form.style.width = '100%'
+    search.style.width = '100%'
+    closer.style.display = 'block'
+    submit.style.display = 'none'
+})
+closer.addEventListener('click',()=>{
+    form.style.display = 'none'
+    searchIcons.style.display = 'block'
+    appNAme.style.display = 'block'
+    closer.style.display = 'none'
+
+})

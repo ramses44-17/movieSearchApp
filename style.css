@@ -39,6 +39,8 @@ header{
 }
 form{
     margin: 25px;
+    position: relative;
+    width: 40%;
 }
 #search{
     padding: 10px;
@@ -48,7 +50,7 @@ form{
     background-color: var(--primary--);
     color: var(--third--);
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    width: 300px;
+    width: 89%;
     border-right: 0;
 }
 #search:focus{
@@ -116,7 +118,9 @@ form button{
     background: var(--primary--);
     border: 2px var(--secondary--) solid;
     border-left: 0px;
-
+    position: relative;
+    padding: 10px 20px;
+    width: 9%;
 }
 
 button ion-icon{
@@ -196,4 +200,38 @@ button ion-icon{
 .disable{
     cursor: not-allowed;
     color: gray;
+}
+#close{
+    display: none;
+    color: white;
+    font-size: 25px;
+    width: 5%;
+    text-align: end;
+    order: -1;
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
+@media screen and (max-width:990px){
+    form{
+        display: none;
+    }
+    .appName{
+        order: 2;
+        margin-left: 40px;
+    }
+    .icon{
+        display: block;
+        color: white;
+        font-size: 20px;
+        margin-left: 20px;
+    }
+    #pagination{
+        width: 50%;
+    }
+}
+@media screen and (max-width:900px) {
+    .movieBloc{
+        width: 45%;
+    }
 }
