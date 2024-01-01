@@ -14,15 +14,47 @@ const prev = document.querySelector('#prev')
 const next = document.querySelector('#next')
 const current = document.querySelector('#current')
 
+var currentPage = 1
+var prevPage = 2
+var nextPage  = 3
+var totalPage = 200
+var lastUrl = ''
+
 getMovie(apiUrl)
 
 
 function getMovie(url) {
+    lastUrl = url
     fetch(url).then(res => res.json()).then(data => {
         
         console.log(data);
         if(data.results.length !== 0){
             showMovie(data.results)
+            currentPage = data.page
+            prevPage = currentPage - 1
+            nextPage  = currentPage + 1
+            totalPage = data.total_pages
+            if (currentPage <= 1) {
+                prev.classList.add('disable')
+                next.classList.remove('disable')
+            } else if(nextPage >= totalPage){
+                prev.classList.remove('disable')
+                next.classList.add('disable')
+            }else{
+                prev.classList.remove('disable')
+                next.classList.remove('disable')
+            }
+            current.textContent = currentPage + ' /' + ` ${totalPage}`
+            function scrollToTop() {
+                window.scrollTo(
+                    {
+                        top: 0,
+                        behavior: "smooth"
+                    }
+                )
+            }
+            
+            window.addEventListener('load',scrollToTop())
         }else{
             section.innerHTML = `
             <ion-icon name="warning-outline" class='iconFound'></ion-icon>
@@ -133,3 +165,21 @@ getGenre(genreUrl)
     const selectedGenreString = genreSelected.join(',')
     getMovie(baseUrl +'discover/movie?' + apiKey + `&with_genres=${selectedGenreString}` + '&include_adult=true' )
  }
+ prev.addEventListener('click',()=>{
+    if (prevPage > 0) {
+        callPage(prevPage)
+    }
+ })
+next.addEventListener('click',()=>{
+    if (nextPage <= totalPage) {
+        callPage(nextPage)
+    }
+    
+})
+
+// cette fonction gère la pagination
+function callPage(page) {
+    let urlSplit = lastUrl.includes('?') ? '&' : '?'
+    const pagination = `page=${page}`
+    return `${getMovie(`${lastUrl}${urlSplit}${pagination}`)}`
+}
