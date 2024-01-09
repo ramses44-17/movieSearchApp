@@ -22,10 +22,14 @@ var lastUrl = ''
 
 getMovie(apiUrl)
 
-
+/***
+ * @param {string} url
+*/
 function getMovie(url) {
     lastUrl = url
-    fetch(url).then(res => res.json()).then(data => {
+    fetch(url)
+    .then(res => res.json())
+    .then(data => {
         
         console.log(data);
         if(data.results.length !== 0){
@@ -88,7 +92,10 @@ function showMovie(data) {
         
     });
 }
-
+/**
+ * @param {number} vote
+ * @returns {string}
+ */
 function getColors(vote) {
     if (vote >= 8) {
         return 'green'
@@ -186,6 +193,7 @@ function callPage(page) {
 const searchIcons = document.querySelector('.icon')
 const appNAme = document.querySelector('.appName')
 const closer = document.querySelector('#close')
+
 searchIcons.addEventListener('click',()=>{
     form.style.display = 'block'
     searchIcons.style.display = 'none'
@@ -202,3 +210,9 @@ closer.addEventListener('click',()=>{
     closer.style.display = 'none'
 
 })
+search.addEventListener('input',(e)=>{
+    if (e.data === null) {
+        getMovie(apiUrl)
+    }
+})
+
