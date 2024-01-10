@@ -79,7 +79,7 @@ function showMovie(data) {
         const film = document.createElement('div')
         film.classList.add('movieBloc')
         film.innerHTML = `
-        <a href="#"><img src="${movie.poster_path?imageUrl + movie.poster_path: "https://via.placeholder.com/150/65ad4f"}" alt="image"></a>
+        <a href="#"><img id='${movie.id}' src="${movie.poster_path?imageUrl + movie.poster_path: "https://via.placeholder.com/150/65ad4f"}" alt="image"></a>
         <div class="movieInfo">
             <h1 id="movieName">${movie.title}</h1><span class="${getColors(movie.vote_average)}">${movie.vote_average}</span>
         </div>
@@ -90,7 +90,12 @@ function showMovie(data) {
         `
         section.appendChild(film)
         
+        const img = document.getElementById(movie.id);
+        img.addEventListener('click',()=>{
+            
+        })
     });
+
 }
 /**
  * @param {number} vote
@@ -216,3 +221,15 @@ search.addEventListener('input',(e)=>{
     }
 })
 
+const topRated = document.querySelector('#topRated')
+topRated.addEventListener('click',()=>{
+    getMovie('https://api.themoviedb.org/3/movie/top_rated?' + apiKey)
+}) 
+const trending = document.querySelector('#trending')
+trending.addEventListener('click',()=>{
+    getMovie('https://api.themoviedb.org/3/trending/movie/day?' + apiKey)
+})
+const upcoming = document.querySelector('#upcoming')
+upcoming.addEventListener('click',()=>{
+    getMovie('https://api.themoviedb.org/3/movie/upcoming?' + apiKey)
+})
