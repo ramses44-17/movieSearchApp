@@ -81,7 +81,7 @@ function showMovie(data) {
         film.innerHTML = `
         <a href="#"><img id='${movie.id}' src="${movie.poster_path?imageUrl + movie.poster_path: "https://via.placeholder.com/150/65ad4f"}" alt="image"></a>
         <div class="movieInfo">
-            <h1 id="movieName">${movie.title}</h1><span class="${getColors(movie.vote_average)}">${movie.vote_average}</span>
+            <h1 id="movieName">${movie.title || movie.name}</h1><span class="${getColors(movie.vote_average)}">${movie.vote_average}</span>
         </div>
         <div class="overview">
             <h3>overview</h3>
@@ -232,4 +232,32 @@ trending.addEventListener('click',()=>{
 const upcoming = document.querySelector('#upcoming')
 upcoming.addEventListener('click',()=>{
     getMovie('https://api.themoviedb.org/3/movie/upcoming?' + apiKey)
+})
+
+const TV = document.querySelector('#TV')
+TV.addEventListener('click',()=>{
+    TV.classList.toggle('actived')
+    if (TV.classList.contains('actived')) {
+        getMovie('https://api.themoviedb.org/3/tv/popular?' + apiKey)
+        form.addEventListener('submit',(e)=>{
+            e.preventDefault()
+            const searchTerm = search.value
+            if (searchTerm) {
+                getMovie('https://api.themoviedb.org/3/search/tv'+ '?query=' + searchTerm + '&include_adult=true&' + apiKey)
+            }else{
+                getMovie(apiUrl)
+            }
+        })
+    }else{
+        getMovie(apiUrl)
+        form.addEventListener('submit',(e)=>{
+            e.preventDefault()
+            const searchTerm = search.value
+            if (searchTerm) {
+                getMovie(searchUrl + '&query=' + searchTerm + '&include_adult=true')
+            }else{
+                getMovie(apiUrl)
+            }
+        })
+    }
 })

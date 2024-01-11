@@ -226,7 +226,6 @@ button ion-icon{
     width: auto;
 }
 #nav a{
-    background: #30a6e6;
     color: white;
     display: block;
     font-size: 12px;
@@ -265,8 +264,10 @@ li:hover ul#submenu{
 #submenu a{
     background: var(--primary--);
 }
-
-
+.actived{
+    font-size: bold;
+    background: #030405;
+}
 
 
 @media screen and (max-width:990px){
