@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <script src="app.js" type="module" defer></script>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital@0;1&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Kanit:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Rubik+Doodle+Shadow&family=Rubik+Scribble&family=Sevillana&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="appName">
+            <span class="textApp">movie</span>Search<span class="textApp">App</span> 
+        </div>
+        <nav id="nav">
+            <ul>
+                <li><a href="movie.html">Movie</a>
+                    <ul class="submenu">
+                        <li><a href="#" id="topRated">Top Rated</a></li>
+                        <li><a href="#" id="trending">Trending</a></li>
+                        <li><a href="#" id="upcoming">Upcoming</a></li>
+                    </ul>
+                </li>
+                <li><a href="tv.html" id="TV">TV</a>
+                    <ul class="submenu">
+                        <li><a href="#" id="topRatedTv">Top Rated</a></li>
+                        <li><a href="#" id="trendingTv">Trending</a></li>
+                        <li><a href="#" id="airingToday">Airing today</a></li>
+                        <li><a href="#" id="onTheAir">On the air</a></li>
+                    </ul>
+                </li>
+                <li><a href="#">Person</a></li>
+            </ul>
+        </nav>
+        
+        <ion-icon name="search-outline" class="icon"></ion-icon>
+        <form id="form">
+            <input type="text" name="search" id="search" placeholder="search..."><button type="submit" id="submit"><ion-icon name="search-sharp"></ion-icon></button>
+        </form>
+        <div id="close"><ion-icon name="close-outline"></ion-icon></div>
+    </header>
+    <div id="filter">
+        <button type="button" class="filterB">action</button>
+        <button type="button" class="filterB">horror</button>
+        <button type="button" class="filterB">adventure</button>
+    </div>
+    <section class="movieSection">
+        <div class="movieBloc">
+            <a href="#"><img src="img/istockphoto-1449244963-1024x1024.jpg" alt="image"></a>
+            <div class="movieInfo">
+                <h1 id="movieName">movie name</h1><span class="movieNote">9</span>
+            </div>
+            <div class="overview">
+                <h3>Overview</h3>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Enim et repellat corporis ad. Deserunt aliquid sapiente rem! Tempora voluptatibus ipsum culpa aliquam ea rerum dolores velit. Assumenda illo ipsa rem?
+            </div>
+        </div>
+        <div class="movieBloc">
+            <a href="#"><img src="img/istockphoto-1449244963-1024x1024.jpg" alt="image"></a>
+            <div class="movieInfo">
+                <h1 id="movieName">movie name</h1><span class="movieNote">9</span>
+            </div>
+            <div class="overview">
+                <h3>Overview</h3>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Enim et repellat corporis ad. Deserunt aliquid sapiente rem! Tempora voluptatibus ipsum culpa aliquam ea rerum dolores velit. Assumenda illo ipsa rem?
+            </div>
+        </div>
+        <div class="movieBloc">
+            <a href="#"><img src="img/istockphoto-1449244963-1024x1024.jpg" alt="image"></a>
+            <div class="movieInfo">
+                <h1 id="movieName">movie name</h1><span class="movieNote">9</span>
+            </div>
+            <div class="overview">
+                <h3>Overview</h3>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Enim et repellat corporis ad. Deserunt aliquid sapiente rem! Tempora voluptatibus ipsum culpa aliquam ea rerum dolores velit. Assumenda illo ipsa rem?
+            </div>
+        </div>
+        <div class="movieBloc">
+            <a href="#"><img src="img/istockphoto-1449244963-1024x1024.jpg" alt="image"></a>
+            <div class="movieInfo">
+                <h1 id="movieName">movie name</h1><span class="movieNote">9</span>
+            </div>
+            <div class="overview">
+                <h3>Overview</h3>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Enim et repellat corporis ad. Deserunt aliquid sapiente rem! Tempora voluptatibus ipsum culpa aliquam ea rerum dolores velit. Assumenda illo ipsa rem?
+            </div>
+        </div>
+    </section>
+    <div id="pagination">
+        <div class="page" id="prev">previous page</div>
+        <div id="current">1</div>
+        <div class="page" id="next">next page</div>
+    </div>
+</body>
+</html>

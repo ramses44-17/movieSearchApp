@@ -6,7 +6,7 @@
     <title>Document</title>
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-    <script src="app.js" type="module" defer></script>
+    <script src="Tv.js" type="module" defer></script>
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -25,14 +25,21 @@
         </div>
         <nav id="nav">
             <ul>
-                <li><a href="#">Movie</a>
-                    <ul id="submenu">
+                <li><a href="movie.html">Movie</a>
+                    <ul class="submenu">
                         <li><a href="#" id="topRated">Top Rated</a></li>
                         <li><a href="#" id="trending">Trending</a></li>
                         <li><a href="#" id="upcoming">Upcoming</a></li>
                     </ul>
                 </li>
-                <li><a href="#" id="TV">TV</a></li>
+                <li><a href="tv.html" id="TV">TV</a>
+                    <ul class="submenu">
+                        <li><a href="#" id="topRatedTv">Top Rated</a></li>
+                        <li><a href="#" id="trendingTv">Trending</a></li>
+                        <li><a href="#" id="airingToday">Airing today</a></li>
+                        <li><a href="#" id="onTheAir">On the air</a></li>
+                    </ul>
+                </li>
                 <li><a href="#">Person</a></li>
             </ul>
         </nav>

@@ -218,7 +218,6 @@ button ion-icon{
 #nav ul{
     background: var(--four--);
     list-style: none;
-    width: 100%;
 }
 #nav li{
     float: left;
@@ -240,7 +239,7 @@ button ion-icon{
 #nav li:hover a{
     background: #030405;
 }
-#submenu{
+.submenu{
     left: 0;
     opacity: 0;
     position: absolute;
@@ -248,28 +247,22 @@ button ion-icon{
     visibility: hidden;
     z-index: 1;
 }
-li:hover ul#submenu{
+li:hover ul.submenu{
     opacity: 1;
     top: 80px;
     visibility: visible;
 }
-#submenu li{
+.submenu li{
     float: none;
     width: 100%;
 }
 
-#submenu a:hover{
+.submenu a:hover{
     background: #086bff;
 }
-#submenu a{
+.submenu a{
     background: var(--primary--);
 }
-.actived{
-    font-size: bold;
-    background: #030405;
-}
-
-
 @media screen and (max-width:990px){
     form{
         display: none;

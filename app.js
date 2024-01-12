@@ -1,31 +1,31 @@
-const apiKey = "api_key=7f77f1bc80c6fe267d4de7f850631d9d"
-const baseUrl = "https://api.themoviedb.org/3/"
+export const apiKey = "api_key=7f77f1bc80c6fe267d4de7f850631d9d"
+export const baseUrl = "https://api.themoviedb.org/3/"
 const  apiUrl = baseUrl + "discover/movie?sort_by=popularity.desc&" + apiKey + '&include_adult=true'
-const imageUrl = "https://image.tmdb.org/t/p/w500"
+export const imageUrl = "https://image.tmdb.org/t/p/w500"
 const section = document.querySelector('.movieSection')
 const search = document.querySelector('#search')
-const form = document.querySelector('#form')
+export const form = document.querySelector('#form')
 const searchUrl = baseUrl + 'search/movie?' + apiKey
-const submit = document.querySelector('#submit')
+export const submit = document.querySelector('#submit')
 
 
 
-const prev = document.querySelector('#prev')
-const next = document.querySelector('#next')
-const current = document.querySelector('#current')
+export const prev = document.querySelector('#prev')
+export const next = document.querySelector('#next')
+export const current = document.querySelector('#current')
 
-var currentPage = 1
-var prevPage = 2
-var nextPage  = 3
-var totalPage = 200
-var lastUrl = ''
+export var currentPage = 1
+export var prevPage = 2
+export var nextPage  = 3
+export var totalPage = 200
+export var lastUrl = ''
 
 getMovie(apiUrl)
 
 /***
  * @param {string} url
 */
-function getMovie(url) {
+export function getMovie(url) {
     lastUrl = url
     fetch(url)
     .then(res => res.json())
@@ -68,12 +68,24 @@ function getMovie(url) {
             <h1 class="noFound" >no results found </h1>
             `
         }
+    }).catch(e=>{
+        const errorPage = `
+      <html>
+        <head>
+          <title>Erreur</title>
+        </head>
+        <body>
+          <h1>Une erreur est survenue</h1>
+        </body>
+      </html>
+    `;
+    document.body.innerHTML = errorPage;
     })
 }
 
 
 
-function showMovie(data) {
+export function showMovie(data) {
     section.innerHTML = ""
     data.forEach(movie => {
         const film = document.createElement('div')
@@ -101,7 +113,7 @@ function showMovie(data) {
  * @param {number} vote
  * @returns {string}
  */
-function getColors(vote) {
+export function getColors(vote) {
     if (vote >= 8) {
         return 'green'
     } else if(vote >= 5){
@@ -116,8 +128,6 @@ form.addEventListener('submit',(e)=>{
     const searchTerm = search.value
     if (searchTerm) {
         getMovie(searchUrl + '&query=' + searchTerm + '&include_adult=true')
-    }else{
-        getMovie(apiUrl)
     }
 })
 
@@ -125,17 +135,15 @@ submit.addEventListener('click',()=>{
     const searchTerm = search.value
     if (searchTerm) {
         getMovie(searchUrl + '&query=' + searchTerm)
-    }else{
-        getMovie(apiUrl)
     }
 })
 
 const genreUrl = baseUrl + 'genre/movie/list?' + apiKey
-const filter = document.querySelector('#filter')
+export const filter = document.querySelector('#filter')
 
 getGenre(genreUrl)
 
- function getGenre(url) {
+function getGenre(url) {
     fetch(url)
     .then(res => res.json())
     .then(data => {
@@ -172,7 +180,7 @@ getGenre(genreUrl)
    getFilteredMovie()
  }
 
- function getFilteredMovie() {
+function getFilteredMovie() {
     const selectedGenreString = genreSelected.join(',')
     getMovie(baseUrl +'discover/movie?' + apiKey + `&with_genres=${selectedGenreString}` + '&include_adult=true' )
  }
@@ -215,11 +223,7 @@ closer.addEventListener('click',()=>{
     closer.style.display = 'none'
 
 })
-search.addEventListener('input',(e)=>{
-    if (e.data === null) {
-        getMovie(apiUrl)
-    }
-})
+
 
 const topRated = document.querySelector('#topRated')
 topRated.addEventListener('click',()=>{
@@ -232,32 +236,4 @@ trending.addEventListener('click',()=>{
 const upcoming = document.querySelector('#upcoming')
 upcoming.addEventListener('click',()=>{
     getMovie('https://api.themoviedb.org/3/movie/upcoming?' + apiKey)
-})
-
-const TV = document.querySelector('#TV')
-TV.addEventListener('click',()=>{
-    TV.classList.toggle('actived')
-    if (TV.classList.contains('actived')) {
-        getMovie('https://api.themoviedb.org/3/tv/popular?' + apiKey)
-        form.addEventListener('submit',(e)=>{
-            e.preventDefault()
-            const searchTerm = search.value
-            if (searchTerm) {
-                getMovie('https://api.themoviedb.org/3/search/tv'+ '?query=' + searchTerm + '&include_adult=true&' + apiKey)
-            }else{
-                getMovie(apiUrl)
-            }
-        })
-    }else{
-        getMovie(apiUrl)
-        form.addEventListener('submit',(e)=>{
-            e.preventDefault()
-            const searchTerm = search.value
-            if (searchTerm) {
-                getMovie(searchUrl + '&query=' + searchTerm + '&include_adult=true')
-            }else{
-                getMovie(apiUrl)
-            }
-        })
-    }
 })
