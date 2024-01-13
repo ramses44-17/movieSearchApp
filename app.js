@@ -103,8 +103,14 @@ export function showMovie(data) {
         section.appendChild(film)
         
         const img = document.getElementById(movie.id);
+        const overlay = document.querySelector('.overlay')
+        const overlayIcon  = document.querySelector('#closeOverlay')
         img.addEventListener('click',()=>{
-            
+            console.log(movie.id);
+            overlay.classList.add('actived')
+        })
+        overlayIcon.addEventListener('click',()=>{
+            overlay.classList.remove('actived')
         })
     });
 
@@ -237,3 +243,26 @@ const upcoming = document.querySelector('#upcoming')
 upcoming.addEventListener('click',()=>{
     getMovie('https://api.themoviedb.org/3/movie/upcoming?' + apiKey)
 })
+
+
+
+/*
+const movieId = 928833
+// recuperer les acteurs
+fetch(`https://api.themoviedb.org/3/movie/${movieId}/credits?${apiKey}`)
+  .then(response => response.json())
+  .then(data => {
+    console.log(data);
+    });
+
+// recuperer les bandes annonces
+const url = `https://api.themoviedb.org/3/movie/${movieId}/videos?${apiKey}`;
+fetch(url)
+  .then(response => response.json())
+  .then(data => {
+    console.log(data.results.filter(video => video.type === 'Trailer'));
+  })
+  .catch(error => {
+    console.log('Une erreur s\'est produite :', error);
+  });
+  */
