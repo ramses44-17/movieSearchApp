@@ -268,32 +268,48 @@ li:hover ul.submenu{
     top: 0;
     width: 0;
     height: 100vh;
-    background: rgba(0, 0, 0, 0.7);
+    background: rgb(248, 242, 242);
     z-index: 9999;
-    opacity: 0;
-    transition: width 0.3s ease;
+    transition: width 0.3s ease-out;
     display: flex;
     flex-direction: column;
-}
-.overlay.actived{
-    width: 100%;
-    transition: width 0.3s ease;
-    opacity: 1;
-}
-#closeOverlay{
-    color: white;
-    font-size: 35px;
-}
-#headOverlay{
-    width: 100%;
-    height: 10%;
-    display: flex;
-    justify-content: flex-end;
+    overflow-x: hidden;
     align-items: center;
     padding: 10px;
 }
-
-
+#closeOverlay{
+    color: rgb(32, 14, 14);
+    font-size: 35px;
+}
+#headOverlay{
+    order: 5;
+}
+#other{
+    width: 100%;
+    height: 75%;
+    display: flex;
+    position: relative;
+}
+#other::before{
+    content: "";
+    background: var(--before,url(img/istockphoto-1449244963-1024x1024.jpg));
+    background-size: cover;
+    background-position: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+    opacity: 0.5;
+}
+#other img{
+    width: 30%;
+    padding: 20px;
+}
+#moviePlus{
+    width: 70%;
+}
 @media screen and (max-width:990px){
     form{
         display: none;

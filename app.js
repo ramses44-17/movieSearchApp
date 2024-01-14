@@ -7,6 +7,10 @@ const search = document.querySelector('#search')
 export const form = document.querySelector('#form')
 const searchUrl = baseUrl + 'search/movie?' + apiKey
 export const submit = document.querySelector('#submit')
+const overlay = document.querySelector('.overlay')
+const other = document.querySelector('#other')
+const before = window.getComputedStyle(other,'::before')
+const imgDetail = document.querySelector('#other img')
 
 
 
@@ -103,18 +107,29 @@ export function showMovie(data) {
         section.appendChild(film)
         
         const img = document.getElementById(movie.id);
-        const overlay = document.querySelector('.overlay')
         const overlayIcon  = document.querySelector('#closeOverlay')
         img.addEventListener('click',()=>{
-            console.log(movie.id);
-            overlay.classList.add('actived')
+            overlay.style.width = '100%'
+            getMovieDetail(movie.id)
+            
+            other.style.setProperty('--before',`url(https://image.tmdb.org/t/p/original${movie.backdrop_path})`)
+            imgDetail.setAttribute('src',movie.poster_path?imageUrl + movie.poster_path: "https://via.placeholder.com/150/65ad4f")
         })
         overlayIcon.addEventListener('click',()=>{
-            overlay.classList.remove('actived')
+            overlay.style.width = 0
         })
     });
 
 }
+
+function getMovieDetail(id) {
+    fetch(baseUrl + `movie/${id}?` + apiKey)
+    .then(res => res.json())
+    .then(detail => {
+        console.log(detail);
+    })
+}
+
 /**
  * @param {number} vote
  * @returns {string}
