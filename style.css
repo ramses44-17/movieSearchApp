@@ -309,6 +309,38 @@ li:hover ul.submenu{
 }
 #moviePlus{
     width: 70%;
+    display: flex;
+    flex-direction: column;
+    color: #333333;
+    justify-content: space-around;
+    padding: 10px;
+}
+.error{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 500px;
+    justify-content: center;
+    align-items: center;
+}
+.error ion-icon{
+    font-size: 100px;
+    color: red;
+}
+#third{
+    display: flex;
+    justify-content: space-around;
+}
+#first ul{
+    display: flex;
+    justify-content: space-between;
+    width: 50%;
+}
+#first ul li{
+    margin: 10px;
+}
+#first h1,h3{
+    font-family: 'poppins',sans-serif;
 }
 @media screen and (max-width:990px){
     form{

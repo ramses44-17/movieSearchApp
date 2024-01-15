@@ -11,6 +11,7 @@ const overlay = document.querySelector('.overlay')
 const other = document.querySelector('#other')
 const before = window.getComputedStyle(other,'::before')
 const imgDetail = document.querySelector('#other img')
+import { convertMinutesToHours,getGenresString,covertDate} from "./other.js"
 
 
 
@@ -74,20 +75,14 @@ export function getMovie(url) {
         }
     }).catch(e=>{
         const errorPage = `
-      <html>
-        <head>
-          <title>Erreur</title>
-        </head>
-        <body>
-          <h1>Une erreur est survenue</h1>
-        </body>
-      </html>
-    `;
+        <div class="error">
+        <h1>impossible de charger la page !!</h1>
+        <ion-icon name="warning-outline"></ion-icon>
+    </div>
+        `
     document.body.innerHTML = errorPage;
-    })
+})
 }
-
-
 
 export function showMovie(data) {
     section.innerHTML = ""
@@ -121,12 +116,52 @@ export function showMovie(data) {
     });
 
 }
-
+const moviePLus = document.querySelector('#moviePlus')
 function getMovieDetail(id) {
     fetch(baseUrl + `movie/${id}?` + apiKey)
     .then(res => res.json())
     .then(detail => {
         console.log(detail);
+        const {title,budget,genres,original_language,overview,runtime,release_date,tagline,status,revenue} = detail 
+        moviePLus.innerHTML = ""
+        const info = `
+        <div id="first">
+                        <h1>${title}</h1>
+                        <ul>
+                            <li>${covertDate(release_date)}</li>
+                            <li>${getGenresString(genres)}</li>
+                            <li>${convertMinutesToHours(runtime)}</li>
+                        </ul>
+                    </div>
+                    <div id="second">
+                        <p><em>${tagline}</em></p>
+                        <div>
+                            <h3>overview</h3>
+                            <p>
+                            ${overview}
+                            </p>
+                        </div>
+                    </div>
+                    <div id="third">
+                        <div class="thirdDet">
+                            <h4>status</h4>
+                            <div>${status}</div>
+                        </div>
+                        <div class="thirdDet">
+                            <h4>original language</h4>
+                            <div>${original_language}</div>
+                        </div>
+                        <div class="thirdDet">
+                            <h4>budget</h4>
+                            <div>${budget}$</div>
+                        </div>
+                        <div class="thirdDet">
+                            <h4>revenue</h4>
+                            <div>${revenue}$</div>
+                        </div>
+                    </div>
+        `
+        moviePLus.innerHTML = info
     })
 }
 
