@@ -267,15 +267,17 @@ li:hover ul.submenu{
     position: fixed;
     top: 0;
     width: 0;
+    opacity: 0;
     height: 100vh;
     background: rgb(248, 242, 242);
     z-index: 9999;
-    transition: width 0.3s ease-out;
+    transition: width 0.5s ease-out;
     display: flex;
     flex-direction: column;
-    overflow-x: hidden;
     align-items: center;
     padding: 10px;
+    transition: opacity 0.4s ease-out;
+    overflow-y: scroll;
 }
 #closeOverlay{
     color: rgb(32, 14, 14);
@@ -286,7 +288,7 @@ li:hover ul.submenu{
 }
 #other{
     width: 100%;
-    height: 75%;
+    height: 70%;
     display: flex;
     position: relative;
 }
@@ -341,6 +343,45 @@ li:hover ul.submenu{
 }
 #first h1,h3{
     font-family: 'poppins',sans-serif;
+}
+#movieActor{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 400px;
+    flex-wrap: wrap;
+    overflow-x: scroll;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.16);
+    scrollbar-width: none;
+}
+#movieActor::-webkit-scrollbar{
+    display: none;
+}
+.actorBloc{
+    border: 2px yellow solid;
+    width:  300px;
+    height: 100%;
+    margin: 3px;
+    display: flex;
+    flex-direction: column;
+}
+.galery{
+    display: flex;
+    width: 100%;
+}
+.galery ion-icon{
+    font-size: 45px;
+    transform: translateY(210px);
+}
+.actorBloc img {
+    width: 100%;
+    flex-grow: 1;
+}
+.actorBloc div{
+    text-align: center;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
 }
 @media screen and (max-width:990px){
     form{

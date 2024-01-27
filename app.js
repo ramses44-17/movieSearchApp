@@ -105,13 +105,15 @@ export function showMovie(data) {
         const overlayIcon  = document.querySelector('#closeOverlay')
         img.addEventListener('click',()=>{
             overlay.style.width = '100%'
+            overlay.style.opacity = 1
             getMovieDetail(movie.id)
-            
+            getActors(movie.id)
             other.style.setProperty('--before',`url(https://image.tmdb.org/t/p/original${movie.backdrop_path})`)
             imgDetail.setAttribute('src',movie.poster_path?imageUrl + movie.poster_path: "https://via.placeholder.com/150/65ad4f")
         })
         overlayIcon.addEventListener('click',()=>{
             overlay.style.width = 0
+            overlay.style.opacity = 0
         })
     });
 
@@ -165,6 +167,29 @@ function getMovieDetail(id) {
     })
 }
 
+
+function getActors(id) {
+    fetch(`${baseUrl}movie/${id}/credits?${apiKey}`)
+  .then(response => response.json())
+  .then(data => {
+    console.log(data.cast);
+    showMovieActor(data.cast);
+    });
+}
+
+const movieActor = document.querySelector('#movieActor')
+function showMovieActor(cast) {
+    movieActor.innerHTML = ""
+    cast.forEach(person => {
+        const actorBloc = document.createElement('div')
+        actorBloc.classList.add('actorBloc')
+        actorBloc.innerHTML = `
+        <img src=${person.profile_path? imageUrl + person.profile_path:"https://via.placeholder.com/150/65ad4f"} alt="actorImage">
+        <div><h1>${person.original_name}</h1><span><i>${person.character}</i></span></div>
+        `
+        movieActor.appendChild(actorBloc)
+    })
+}
 /**
  * @param {number} vote
  * @returns {string}
@@ -249,7 +274,6 @@ next.addEventListener('click',()=>{
     if (nextPage <= totalPage) {
         callPage(nextPage)
     }
-    
 })
 
 // cette fonction gère la pagination
@@ -277,7 +301,6 @@ closer.addEventListener('click',()=>{
     searchIcons.style.display = 'block'
     appNAme.style.display = 'block'
     closer.style.display = 'none'
-
 })
 
 
@@ -295,15 +318,26 @@ upcoming.addEventListener('click',()=>{
 })
 
 
+//scroll des acteurs
+const container = document.querySelector('#movieActor');
+const scrollLeftButton = document.querySelector('#left');
+const scrollRightButton = document.querySelector('#rigth');
 
+scrollLeftButton.addEventListener('click', () => {
+  container.scrollBy({
+    left: -100,
+    behavior: 'smooth'
+  }) // Défilement horizontal vers la gauche de 100 pixels
+});
+
+scrollRightButton.addEventListener('click', () => {
+  container.scrollBy({
+    left: 100,
+    behavior: 'smooth'
+  }) // Défilement horizontal vers la droite de 100 pixels
+});
 /*
 const movieId = 928833
-// recuperer les acteurs
-fetch(`https://api.themoviedb.org/3/movie/${movieId}/credits?${apiKey}`)
-  .then(response => response.json())
-  .then(data => {
-    console.log(data);
-    });
 
 // recuperer les bandes annonces
 const url = `https://api.themoviedb.org/3/movie/${movieId}/videos?${apiKey}`;
@@ -315,4 +349,4 @@ fetch(url)
   .catch(error => {
     console.log('Une erreur s\'est produite :', error);
   });
-  */
+*/
