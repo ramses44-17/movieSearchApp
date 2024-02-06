@@ -104,10 +104,11 @@ export function showMovie(data) {
         const img = document.getElementById(movie.id);
         const overlayIcon  = document.querySelector('#closeOverlay')
         img.addEventListener('click',()=>{
-            overlay.style.width = '100%'
+            overlay.style.width = '100vw'
             overlay.style.opacity = 1
             getMovieDetail(movie.id)
             getActors(movie.id)
+            getVideo(movie.id)
             other.style.setProperty('--before',`url(https://image.tmdb.org/t/p/original${movie.backdrop_path})`)
             imgDetail.setAttribute('src',movie.poster_path?imageUrl + movie.poster_path: "https://via.placeholder.com/150/65ad4f")
         })
@@ -185,7 +186,7 @@ function showMovieActor(cast) {
         actorBloc.classList.add('actorBloc')
         actorBloc.innerHTML = `
         <img src=${person.profile_path? imageUrl + person.profile_path:"https://via.placeholder.com/150/65ad4f"} alt="actorImage">
-        <div><h1>${person.original_name}</h1><span><i>${person.character}</i></span></div>
+        <div><h2>${person.original_name}</h2><span><i>${person.character?person.character:"????"}</i></span></div>
         `
         movieActor.appendChild(actorBloc)
     })
@@ -336,6 +337,28 @@ scrollRightButton.addEventListener('click', () => {
     behavior: 'smooth'
   }) // Défilement horizontal vers la droite de 100 pixels
 });
+
+function getVideo(id) {
+    fetch(`https://api.themoviedb.org/3/movie/${id}/videos?${apiKey}`)
+    .then(res => res.json())
+    .then(vData => {
+        console.log(vData.results.filter(video => video.type === 'Trailer' || video.type === 'Teaser'));
+        showVideo(vData.results.filter(video => video.type === 'Trailer' || video.type === 'Teaser'));
+    })
+    .catch(e => console.log('Une erreur s\'est produite :', error))
+}
+const vBloc = document.querySelector('#vBloc')
+function showVideo(dataVideo) {
+    vBloc.innerHTML = ''
+    dataVideo.forEach(video =>{
+        const iframe = document.createElement('iframe')
+        iframe.width = '650'
+        iframe.height = '450'
+        iframe.src = `https://www.youtube.com/embed/${video.key}`
+        iframe.title = video.name
+        vBloc.appendChild(iframe)
+    })
+}
 /*
 const movieId = 928833
 
@@ -344,7 +367,7 @@ const url = `https://api.themoviedb.org/3/movie/${movieId}/videos?${apiKey}`;
 fetch(url)
   .then(response => response.json())
   .then(data => {
-    console.log(data.results.filter(video => video.type === 'Trailer'));
+    console.log(data.results.filter(video => video.type === 'Trailer' || video.type === 'Teaser'));
   })
   .catch(error => {
     console.log('Une erreur s\'est produite :', error);
